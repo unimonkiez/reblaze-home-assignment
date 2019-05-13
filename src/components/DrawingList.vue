@@ -1,7 +1,7 @@
 <template>
   <div class="drawing-list">
     <div class="drawings-container">
-      <DrawingThumb v-for="item in data" v-bind:key="item.id" v-bind:data="item" />
+      <DrawingThumb v-for="(item, index) in data" v-bind:key="item.id" v-bind:data.sync="data[index]" />
     </div>
   </div>
 </template>

@@ -8,18 +8,20 @@ export default class Drawings {
                     id: 'abc',
                     content: [
                         {
+                            width: 20,
                             color: '#ff0000',
-                            data: [
+                            coordinates: [
                                 { x: 12, y: 13 },
                                 { x: 12, y: 14 },
                                 { x: 12, y: 15 },
-                                { x: 12, y: 16 },
+                                { x: 702, y: 166 },
                             ],
                         },
                             {
-                            color: '#ff0000',
-                            data: [
-                                { x: 12, y: 17 },
+                            width: 5,
+                            color: '#00ff00',
+                            coordinates: [
+                                { x: 12, y: 60 },
                             ],
                         },
                     ]
@@ -28,18 +30,20 @@ export default class Drawings {
                     id: '123',
                     content: [
                         {
-                            color: '#ff0000',
-                            data: [
+                            width: 10,
+                            color: '#0000ff',
+                            coordinates: [
                                 { x: 12, y: 13 },
                                 { x: 12, y: 14 },
                                 { x: 12, y: 15 },
-                                { x: 12, y: 16 },
+                                { x: 12, y: 166 },
                             ],
                         },
                             {
-                            color: '#ff0000',
-                            data: [
-                                { x: 12, y: 17 },
+                            width: 20,
+                            color: '#ffffff',
+                            coordinates: [
+                                { x: 12, y: 50 },
                             ],
                         },
                     ]

@@ -2,7 +2,7 @@
   <div class="drawing-thumb">
     I'm a drawing with id: {{data.id}}
     <div class="drawing-thumb-board-container">
-      <DrawingBoard v-bind:data="data.content" readonly class="thumbnails" /> 
+      <DrawingBoard v-bind:strokes.sync="data.content" readonly /> 
     </div>
     
   </div>
@@ -17,7 +17,7 @@ export default {
     DrawingBoard
   },
   props: {
-    data: Object
+    data: Object,
   }
 }
 </script>
@@ -27,8 +27,8 @@ export default {
   .drawing-thumb-board-container {
     width: 20%;
   }
-    .thumbnails:hover {
+    /* .thumbnails:hover {
     width: 130%;
     transition: 0.5s;
-  }
+  } */
 </style>

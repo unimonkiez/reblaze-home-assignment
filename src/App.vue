@@ -5,7 +5,7 @@
       @change="tabChanged"
       color="cyan"
       dark
-      slider-color="yellow"
+      slider-color="red"
     >
       <v-tab ripple>
         Home
@@ -20,7 +20,9 @@
     </v-content>
   </v-app>
 </template>
-
+<style>
+  @import './assets/css.css';
+</style>
 <script>
 import Drawings from './drawings.js';
 

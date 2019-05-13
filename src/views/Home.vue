@@ -15,7 +15,9 @@ export default {
     DrawingList
   },
   data() {
-    return Drawings.data;
+    return {
+      draws: Drawings.data.draws,
+    };
   }
 }
 </script>

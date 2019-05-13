@@ -24,34 +24,28 @@ export default {
       }
     }
   },
-  computed: {
-    currentMouse: function () {
-      var c = this.$refs.canvas;
-      var rect = c.getBoundingClientRect();
-      
-      return {
-        x: this.mouse.current.x - rect.left,
-        y: this.mouse.current.y - rect.top
-      }
-    }
-  },
-  template: '',
   methods: {
+
+    getRatio(){
+        const canvas = this.$refs.canvas;
+        const actualWidth = canvas.getBoundingClientRect().width;
+        const canvasWidth = canvas.width;
+        return canvasWidth / actualWidth;
+    },
     draw: function (event) {
       
-      
-        // requestAnimationFrame(this.draw);
+      // requestAnimationFrame(this.draw);
       if (this.mouse.down ) {
         var c = this.$refs.canvas;
 
       var ctx = c.getContext("2d");
         
-        ctx.clearRect(0,0,800,800);
+      ctx.clearRect(0,0,800,800);
         
     
-      ctx.lineTo(this.currentMouse.x, this.currentMouse.y);
-        ctx.strokeStyle ="#F63E02";
-        ctx.lineWidth = 2;
+      ctx.lineTo(this.mouse.current.x, this.mouse.current.y);
+      ctx.strokeStyle ="#F63E02";
+      ctx.lineWidth = 2;
       ctx.stroke()
       }
       
@@ -61,19 +55,17 @@ export default {
 
         var c = this.$refs.canvas;
 
-        const actualWidth = c.getBoundingClientRect().width;
-        const canvasWidth = c.width;
-        const ratio = canvasWidth / actualWidth;
+        const ratio = this.getRatio();
 
         this.mouse.current = {
-          x: event.pageX * ratio,
-          y: event.pageY * ratio
+          x: event.offsetX * ratio,
+          y: event.offsetY * ratio
         }
 
               
         var ctx = c.getContext("2d");
 
-        ctx.moveTo(this.currentMouse.x, this.currentMouse.y)
+        ctx.moveTo(this.mouse.current.x, this.mouse.current.y)
         
 
       },
@@ -84,13 +76,11 @@ export default {
 
         var c = this.$refs.canvas;
 
-        const actualWidth = c.getBoundingClientRect().width;
-        const canvasWidth = c.width;
-        const ratio = canvasWidth / actualWidth;
+        const ratio = this.getRatio();
 
         this.mouse.current = {
-          x: event.pageX * ratio,
-          y: event.pageY * ratio
+          x: event.offsetX * ratio,
+          y: event.offsetY * ratio
         }
         
         this.draw(event)
@@ -103,7 +93,7 @@ export default {
       var ctx = c.getContext("2d");
                       ctx.translate(0.5, 0.5);
                       ctx.imageSmoothingEnabled= false;
-    // this.draw();
+    this.draw();
   }
 }
 </script>

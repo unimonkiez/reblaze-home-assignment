@@ -1,8 +1,8 @@
 <template>
   <div class="drawing-thumb">
-    I'm a thumb with id: {{data.id}}
+    I'm a drawing with id: {{data.id}}
     <div class="drawing-thumb-board-container">
-      <DrawingBoard v-bind:data="data.content" readonly /> 
+      <DrawingBoard v-bind:data="data.content" readonly class="thumbnails" /> 
     </div>
     
   </div>
@@ -25,6 +25,10 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .drawing-thumb-board-container {
-    width: 200px;
+    width: 20%;
+  }
+    .thumbnails:hover {
+    width: 130%;
+    transition: 0.5s;
   }
 </style>

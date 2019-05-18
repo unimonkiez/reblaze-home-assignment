@@ -6,18 +6,33 @@
     v-on:mousemove="handleMouseMove"
     width="800px"
     height="800px"
-  ></canvas>
+  >
+    <!-- <div ref="cursor" id="cursor" class="cursor"/>
+    <DrawingBoardCursor v-bind:readonly="this.readonly" v-bind:coordinates="this.mouse.current"/>-->
+  </canvas>
 </template>
 
 <script>
+// import DrawingBoardCursor from "@/components/DrawingBoardCursor.vue";
+
 export default {
   name: "DrawingBoard",
+  components: {
+    // DrawingBoardCursor
+  },
   data: function() {
     return {
       mouse: {
-        current: {
+        _current: {
           x: 0,
           y: 0
+        },
+        get current() {
+          return this._current;
+        },
+        set current(value) {
+          this._current.x = value.x;
+          this._current.y = value.y;
         },
         down: false
       }
@@ -64,6 +79,8 @@ export default {
 
         otherCordinates.forEach(coordinate => {
           ctx.lineTo(coordinate.x, coordinate.y);
+
+          this.mouse.current = coordinate;
         });
 
         ctx.strokeStyle = draw.color;
@@ -101,6 +118,10 @@ export default {
       }
     },
     handleMouseMove: function(event) {
+      // var cursor = document.getElementById("cursor");
+
+      // cursor.style.transform = `translate(${this.mouse.current.x - 10}px, ${this.mouse.current.y - 10}px)`;
+
       if (!this.readonly && this.mouse.down) {
         const newStrokes = this.strokes;
 
@@ -110,7 +131,7 @@ export default {
 
         newStrokes[newStrokes.length - 1].coordinates.push({
           x: event.offsetX * ratio,
-          y: event.offsetY * ratio,
+          y: event.offsetY * ratio
         });
 
         this.$emit("update:strokes", newStrokes);
@@ -124,9 +145,39 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 canvas {
+  margin-top: 10px;
   background: white;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
   width: 100%;
   height: auto;
+  /* cursor: none; */
 }
+/* canvas + cursor {
+  position: fixed;    
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 100px solid rgb(0, 0, 150);
+}
+
+cursor {
+  position: fixed;    
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 100px solid rgb(0, 0, 150);
+}
+.cursor {
+  position: fixed;    
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 100px solid rgb(0, 0, 150);
+} */
 </style>

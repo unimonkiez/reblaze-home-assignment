@@ -20,11 +20,9 @@
     </v-content>
   </v-app>
 </template>
-<style>
-  @import './assets/css.css';
-</style>
 <script>
 import Drawings from './drawings.js';
+import Colors from './colors.js';
 
 const indexToRouteName = [
   '/',
@@ -45,6 +43,7 @@ export default {
   },
   created () {
     Drawings.getData();
+    Colors.getData();
   },
 }
 </script>

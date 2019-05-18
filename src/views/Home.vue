@@ -1,23 +1,25 @@
 <template>
   <div class="home">
-    <DrawingList v-bind:data="draws"/>
+    <DrawingList v-bind:drawings="drawings"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import DrawingList from '@/components/DrawingList.vue'
-import Drawings from '@/drawings'
+import DrawingList from "@/components/DrawingList.vue";
+import Drawings from "@/drawings.js";
 
 export default {
-  name: 'home',
+  name: "home",
   components: {
     DrawingList
   },
   data() {
     return {
-      draws: Drawings.data.draws,
+      drawings: Drawings.data.draws
     };
   }
-}
+};
+</script>
+
 </script>

@@ -21,7 +21,9 @@ export default class Drawings {
                             width: 5,
                             color: '#00ff00',
                             coordinates: [
-                                { x: 12, y: 60 },
+                                { x: 70, y: 800 },
+                                { x: 420, y: 700 },
+                                { x: 0, y: 500 },
                             ],
                         },
                     ]
@@ -44,6 +46,15 @@ export default class Drawings {
                             color: '#ffffff',
                             coordinates: [
                                 { x: 12, y: 50 },
+                            ],
+                        },
+                        {
+                            width: 5,
+                            color: '#000000',
+                            coordinates: [
+                                { x: 500, y: 0 },
+                                { x: 123, y: 654 },
+                                { x: 0, y: 500 },
                             ],
                         },
                     ]

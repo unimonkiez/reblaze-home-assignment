@@ -5,6 +5,10 @@ export default class Colors {
         Colors.data = {
             colors: [
                 {
+                    name: 'Black',
+                    id: '#000000'
+                },                
+                {
                     name: '',
                     id: '#13f7ab'
                 },

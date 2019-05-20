@@ -2,7 +2,7 @@
   <!-- <input type="radio" name="color" class="color-item" value="#ff0000"> -->
   <!-- <input type="radio" name="color" class="color-item" v-model="color" v-bind:value="color.id"> -->
   <label class="color-item">
-    <input type="radio" name="color" v-bind:value="color.id" visibility: hidden>
+    <input type="radio" name="color" v-bind:value="color.id" visibility: hidden @change="colorChanged">
     <span
       class="circle"
       v-bind:style="{ background: color.id }"
@@ -18,6 +18,11 @@ export default {
   //   },
   props: {
     color: Object
+  },
+  methods: {
+    colorChanged() {
+      this.$emit("clicked", this.color.id);
+    }
   }
 };
 </script>
@@ -42,7 +47,7 @@ export default {
   box-shadow: 1px 5px 5px black;
   height: 30px;
   width: 30px;
-   margin-right: 2px;
+  margin-right: 2px;
   /* background-color: #00ff00; */
   border-radius: 50%;
   display: inline-block;

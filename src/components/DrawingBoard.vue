@@ -45,7 +45,9 @@ export default {
         return [];
       }
     },
-    readonly: Boolean
+    readonly: Boolean,
+    currentColor: String,
+    currentWidth: Number,
   },
   mounted: function() {
     // var c = this.$refs.canvas;
@@ -64,12 +66,14 @@ export default {
     draw: function(event) {
       // requestAnimationFrame(this.draw);
       // if (this.mouse.down )
+      this.readonly;
+      
       var c = this.$refs.canvas;
 
       var ctx = c.getContext("2d");
 
       ctx.clearRect(0, 0, 800, 800);
-
+      
       this.strokes.forEach(draw => {
         ctx.beginPath();
 
@@ -99,8 +103,8 @@ export default {
         const ratio = this.getRatio();
 
         newStrokes.push({
-          width: 10,
-          color: "#ff0000",
+          width: this.currentWidth,
+          color: this.currentColor,
           coordinates: [
             {
               x: event.offsetX * ratio,

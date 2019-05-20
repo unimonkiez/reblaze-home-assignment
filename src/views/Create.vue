@@ -2,9 +2,10 @@
   <div class="create">
     <!-- <v-layout> -->
     <v-flex xs12 sm6 offset-sm3>
-      <DrawingBoard id="drawingBoard" v-bind:readonly="false"/>
+            <!-- v-bind:currentColor.sync="chosenColor" v-bind:currentWidth.sync="chosenWidth" -->
+      <DrawingBoard id="drawingBoard" v-bind:readonly="false" v-bind:currentColor.sync="chosenColor" v-bind:currentWidth.sync="chosenWidth"/> 
       <!-- </DrawingBoard> -->
-      <Palette v-bind:colors="colors"/>
+      <Palette v-bind:colors="colors" v-bind:currentColor.sync="chosenColor"  v-bind:currentWidth="chosenWidth"/>
     </v-flex>
     <!-- </v-layout> -->
   </div>
@@ -23,14 +24,21 @@ export default {
     DrawingBoard,
     Palette
   },
-  // props: {
-  //   data: Array
-  // },
+  props: {
+    chosenColor: String,
+    chosenWidth: Number
+  },
   data() {
     return {
       // drawings: Drawings.data,
       colors: Colors.data.colors
     };
+  },
+  methods: {
+    onColorChanged(color)
+    {
+      this.chosenColor = color;
+    }
   }
 };
 </script>

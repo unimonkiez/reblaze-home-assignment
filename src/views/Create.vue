@@ -5,7 +5,8 @@
             <!-- v-bind:currentColor.sync="chosenColor" v-bind:currentWidth.sync="chosenWidth" -->
       <DrawingBoard id="drawingBoard" v-bind:readonly="false" v-bind:currentColor.sync="chosenColor" v-bind:currentWidth.sync="chosenWidth"/> 
       <!-- </DrawingBoard> -->
-      <Palette v-bind:colors="colors" v-bind:currentColor.sync="chosenColor"  v-bind:currentWidth="chosenWidth"/>
+      <Palette v-bind:colors="colors" @colorUpdate="onColorChanged"/>
+       <!-- v-bind:currentColor.sync="chosenColor"  v-bind:currentWidth="chosenWidth" -->
     </v-flex>
     <!-- </v-layout> -->
   </div>

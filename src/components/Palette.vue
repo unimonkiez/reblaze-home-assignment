@@ -10,6 +10,7 @@
     </div>
     <div class="size-container">
       <vue-slider class="slider"
+      ref="widthSlider"
         v-model="sliderValue"
         v-on:drag-start="onDragStart"
         v-on:dragging="onDragging"
@@ -48,13 +49,13 @@ export default {
       // this.currentColor = color;
     },
     onDragStart() {
-      // alert(1)
+      currentWidth = this.$refs.widthSlider.getValue();
     },
     onDragging() {
-      // this.currentWidth = {{ currentWidth }};
+      currentWidth = this.$refs.widthSlider.getValue();
     },
     onDragEnd() {
-      // this.currentWidth = sliderValue; 
+      this.$emit("widthUpdate", this.$refs.widthSlider.getValue());
     }
   }
 };

@@ -5,7 +5,7 @@
             <!-- v-bind:currentColor.sync="chosenColor" v-bind:currentWidth.sync="chosenWidth" -->
       <DrawingBoard id="drawingBoard" v-bind:readonly="false" v-bind:currentColor.sync="chosenColor" v-bind:currentWidth.sync="chosenWidth"/> 
       <!-- </DrawingBoard> -->
-      <Palette v-bind:colors="colors" @colorUpdate="onColorChanged"/>
+      <Palette v-bind:colors="colors" @colorUpdate="onColorChanged" @widthUpdate="onChangeWidth" />
        <!-- v-bind:currentColor.sync="chosenColor"  v-bind:currentWidth="chosenWidth" -->
     </v-flex>
     <!-- </v-layout> -->
@@ -39,6 +39,10 @@ export default {
     onColorChanged(color)
     {
       this.chosenColor = color;
+    },
+    onChangeWidth(width)
+    {
+      this.chosenWidth = width;
     }
   }
 };

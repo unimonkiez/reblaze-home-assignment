@@ -2,11 +2,16 @@
   <div class="create">
     <!-- <v-layout> -->
     <v-flex xs12 sm6 offset-sm3>
-            <!-- v-bind:currentColor.sync="chosenColor" v-bind:currentWidth.sync="chosenWidth" -->
-      <DrawingBoard id="drawingBoard" v-bind:readonly="false" v-bind:currentColor.sync="chosenColor" v-bind:currentWidth.sync="chosenWidth"/> 
+      <!-- v-bind:currentColor.sync="chosenColor" v-bind:currentWidth.sync="chosenWidth" -->
+      <DrawingBoard
+        id="drawingBoard"
+        v-bind:readonly="false"
+        v-bind:currentColor.sync="color"
+        v-bind:currentWidth.sync="width"
+      />
       <!-- </DrawingBoard> -->
-      <Palette v-bind:colors="colors" @colorUpdate="onColorChanged" @widthUpdate="onChangeWidth" />
-       <!-- v-bind:currentColor.sync="chosenColor"  v-bind:currentWidth="chosenWidth" -->
+      <Palette v-bind:colors="colors" @colorUpdate="onColorChanged" @widthUpdate="onChangeWidth"/>
+      <!-- v-bind:currentColor.sync="chosenColor"  v-bind:currentWidth="chosenWidth" -->
     </v-flex>
     <!-- </v-layout> -->
   </div>
@@ -32,17 +37,17 @@ export default {
   data() {
     return {
       // drawings: Drawings.data,
-      colors: Colors.data.colors
+      colors: Colors.data.colors,
+      color: this.chosenColor,
+      width: this.chosenWidth
     };
   },
   methods: {
-    onColorChanged(color)
-    {
-      this.chosenColor = color;
+    onColorChanged(color) {
+      this.color = color;
     },
-    onChangeWidth(width)
-    {
-      this.chosenWidth = width;
+    onChangeWidth(width) {
+      this.width = width;
     }
   }
 };

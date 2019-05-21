@@ -16,7 +16,7 @@
         v-on:dragging="onDragging"
         v-on:drag-end="onDragEnd"
       ></vue-slider> {{ sliderValue}}
-      <span class="width-circle"/>
+      <span class="width-circle" v-bind:style="{ background: currentColor, width: currentWidth + 'px', height: currentWidth + 'px' }"/> 
     </div>
   </div>
 </template>
@@ -35,27 +35,41 @@ export default {
   },
   props: {
     colors: Array,
-    currentWidth: Number
+    // currentWidth: Number
     // currentColor: String
+  },
+  computed: {
+    circleSize: function(){
+      return {
+        size: this.currentWidth + "px"
+      }
+    }
   },
   data() {
     return {
       sliderValue: 0,
+      currentColor: "#000000",
+      currentWidth: 1
     };
   },
   methods: {
+    handleWidth(){
+      let newWidth = this.$refs.widthSlider.getValue();
+      this.currentWidth = newWidth;
+      this.$emit("widthUpdate", newWidth);
+    },
     onColorChanged(color) {
+      this.currentColor = color;
       this.$emit("colorUpdate", color);
-      // this.currentColor = color;
     },
     onDragStart() {
-      currentWidth = this.$refs.widthSlider.getValue();
+      this.handleWidth();
     },
     onDragging() {
-      currentWidth = this.$refs.widthSlider.getValue();
+     this.handleWidth();
     },
     onDragEnd() {
-      this.$emit("widthUpdate", this.$refs.widthSlider.getValue());
+      this.handleWidth();
     }
   }
 };
@@ -73,7 +87,7 @@ export default {
   height: 30px;
   width: 30px;
   margin-right: 2px;
-  background-color: #a299b9;
+  /* background-color: #000000; */
   border-radius: 50%;
   display: inline-block;
 }

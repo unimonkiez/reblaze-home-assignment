@@ -1,16 +1,26 @@
 <template>
   <div class="create">
     <!-- <v-layout> -->
-    <v-flex xs12 sm6 offset-sm3>
+    <v-flex xs10 sm6 offset-sm3>
       <!-- v-bind:currentColor.sync="chosenColor" v-bind:currentWidth.sync="chosenWidth" -->
       <DrawingBoard
+        ref="drawingBoard"
+        class="drawingBoard"
         id="drawingBoard"
         v-bind:readonly="false"
         v-bind:currentColor.sync="color"
         v-bind:currentWidth.sync="width"
       />
+      <Palette
+        class="palette"
+        v-bind:colors="colors"
+        @colorUpdate="onColorChanged"
+        @widthUpdate="onChangeWidth"
+      />
+      <v-btn flat icon>
+        <v-icon @click="onClearCanvas">delete_forever</v-icon>
+      </v-btn>
       <!-- </DrawingBoard> -->
-      <Palette v-bind:colors="colors" @colorUpdate="onColorChanged" @widthUpdate="onChangeWidth"/>
       <!-- v-bind:currentColor.sync="chosenColor"  v-bind:currentWidth="chosenWidth" -->
     </v-flex>
     <!-- </v-layout> -->
@@ -43,6 +53,9 @@ export default {
     };
   },
   methods: {
+    onClearCanvas() {
+      this.$refs.drawingBoard.onClearCanvas();
+    },
     onColorChanged(color) {
       this.color = color;
     },
@@ -52,3 +65,18 @@ export default {
   }
 };
 </script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+/* .create{
+  display:flex;
+  flex-direction:row;
+
+} */
+/* .palette{
+  width: 80%;
+} */
+/* .drawingBoard{
+  float: right;
+}  */
+</style>

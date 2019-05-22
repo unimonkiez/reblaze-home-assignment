@@ -7,6 +7,10 @@ export default class Colors {
                 {
                     name: 'Black',
                     id: '#000000'
+                },                     
+                {
+                    name: 'White',
+                    id: '#ffffff'
                 },                
                 {
                     name: '',

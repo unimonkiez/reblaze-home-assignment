@@ -8,16 +8,29 @@
         @clicked="onColorChanged"
       />
     </div>
-    <div class="size-container">
-      <vue-slider class="slider"
-      ref="widthSlider"
-        v-model="sliderValue"
-        v-on:drag-start="onDragStart"
-        v-on:dragging="onDragging"
-        v-on:drag-end="onDragEnd"
-      ></vue-slider> {{ sliderValue}}
-      <span class="width-circle" v-bind:style="{ background: currentColor, width: currentWidth + 'px', height: currentWidth + 'px' }"/> 
-    </div>
+    <!-- <div class="size-container"> -->
+      <!-- <v-flex xs9> -->
+        <vue-slider
+          class="slider"
+          :marks="marks"
+          :adsorb="true"
+          :included="true"
+          :min="1"
+          :max="50"
+          ref="widthSlider"
+          v-model="sliderValue"
+          v-on:drag-start="onDragStart"
+          v-on:dragging="onDragging"
+          v-on:drag-end="onDragEnd"
+        ></vue-slider>
+      <!-- </v-flex> -->
+    <!-- </div> -->
+      <!-- <v-flex xs3> -->
+        <span
+          class="width-circle"
+          v-bind:style="{ background: currentColor, width: currentWidth + 'px', height: currentWidth + 'px' }"
+        />
+      <!-- </v-flex>     -->
   </div>
 </template>
 
@@ -34,26 +47,27 @@ export default {
     VueSlider
   },
   props: {
-    colors: Array,
+    colors: Array
     // currentWidth: Number
     // currentColor: String
   },
-  computed: {
-    circleSize: function(){
-      return {
-        size: this.currentWidth + "px"
-      }
-    }
-  },
+  // computed: {
+  //   circleSize: function(){
+  //     return {
+  //       size: this.currentWidth + "px"
+  //     }
+  //   }
+  // },
   data() {
     return {
-      sliderValue: 0,
+      sliderValue: 1,
       currentColor: "#000000",
-      currentWidth: 1
+      currentWidth: 1,
+      marks: [1, 5, 10, 20, 30, 40, 50]
     };
   },
   methods: {
-    handleWidth(){
+    handleWidth() {
       let newWidth = this.$refs.widthSlider.getValue();
       this.currentWidth = newWidth;
       this.$emit("widthUpdate", newWidth);
@@ -66,7 +80,7 @@ export default {
       this.handleWidth();
     },
     onDragging() {
-     this.handleWidth();
+      this.handleWidth();
     },
     onDragEnd() {
       this.handleWidth();
@@ -77,10 +91,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.size-container {
+/* .size-container {
   width: 80%;
-  /* display: inline-block; */
-}
+  display: inline-block;
+} */
 
 .width-circle {
   box-shadow: 1px 5px 5px black;
@@ -90,6 +104,7 @@ export default {
   /* background-color: #000000; */
   border-radius: 50%;
   display: inline-block;
+  transition: 0.3s;
 }
 
 /* .slider{

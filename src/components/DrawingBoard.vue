@@ -35,7 +35,8 @@ export default {
           this._current.y = value.y;
         },
         down: false
-      }
+      },
+      drawingStrokes: this.strokes
     };
   },
   props: {
@@ -57,6 +58,15 @@ export default {
     this.draw();
   },
   methods: {
+    onClearCanvas(){
+      var c = this.$refs.canvas;
+
+      var ctx = c.getContext("2d");
+
+      ctx.clearRect(0, 0, 800, 800);
+
+      this.drawingStrokes = [];
+    },
     getRatio() {
       const canvas = this.$refs.canvas;
       const actualWidth = canvas.getBoundingClientRect().width;
@@ -74,7 +84,7 @@ export default {
 
       ctx.clearRect(0, 0, 800, 800);
       
-      this.strokes.forEach(draw => {
+      this.drawingStrokes.forEach(draw => {
         ctx.beginPath();
 
         const [firstCordinate, ...otherCordinates] = draw.coordinates;
@@ -95,7 +105,7 @@ export default {
     },
     handleMouseDown: function(event) {
       if (!this.readonly) {
-        const newStrokes = this.strokes;
+        const newStrokes = this.drawingStrokes;
         this.mouse.down = true;
 
         var c = this.$refs.canvas;
@@ -127,7 +137,7 @@ export default {
       // cursor.style.transform = `translate(${this.mouse.current.x - 10}px, ${this.mouse.current.y - 10}px)`;
 
       if (!this.readonly && this.mouse.down) {
-        const newStrokes = this.strokes;
+        const newStrokes = this.drawingStrokes;
 
         var c = this.$refs.canvas;
 

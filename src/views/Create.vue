@@ -52,6 +52,10 @@ export default {
       width: this.chosenWidth
     };
   },
+  mounted() {
+   this.color = "#000000";
+   this.width = 1;
+  },
   methods: {
     onClearCanvas() {
       this.$refs.drawingBoard.onClearCanvas();

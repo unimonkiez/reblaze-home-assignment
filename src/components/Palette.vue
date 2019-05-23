@@ -9,28 +9,28 @@
       />
     </div>
     <!-- <div class="size-container"> -->
-      <!-- <v-flex xs9> -->
-        <vue-slider
-          class="slider"
-          :marks="marks"
-          :adsorb="true"
-          :included="true"
-          :min="1"
-          :max="50"
-          ref="widthSlider"
-          v-model="sliderValue"
-          v-on:drag-start="onDragStart"
-          v-on:dragging="onDragging"
-          v-on:drag-end="onDragEnd"
-        ></vue-slider>
-      <!-- </v-flex> -->
+    <!-- <v-flex xs9> -->
+    <vue-slider
+      class="slider"
+      :marks="marks"
+      :adsorb="true"
+      :included="true"
+      :min="1"
+      :max="50"
+      ref="widthSlider"
+      v-model="sliderValue"
+      v-on:drag-start="onDragStart"
+      v-on:dragging="onDragging"
+      v-on:drag-end="onDragEnd"
+    ></vue-slider>
+    <!-- </v-flex> -->
     <!-- </div> -->
-      <!-- <v-flex xs3> -->
-        <span
-          class="width-circle"
-          v-bind:style="{ background: currentColor, width: currentWidth + 'px', height: currentWidth + 'px' }"
-        />
-      <!-- </v-flex>     -->
+    <!-- <v-flex xs3> -->
+    <span
+      class="width-circle"
+      v-bind:style="{ background: currentColor, width: currentWidth + 'px', height: currentWidth + 'px' }"
+    />
+    <!-- </v-flex>     -->
   </div>
 </template>
 

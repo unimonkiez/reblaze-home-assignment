@@ -14,6 +14,7 @@
 
 <script>
 // import DrawingBoardCursor from "@/components/DrawingBoardCursor.vue";
+let timer;
 
 export default {
   name: "DrawingBoard",
@@ -36,7 +37,9 @@ export default {
         },
         down: false
       },
-      drawingStrokes: this.strokes
+      drawingStrokes: this.strokes,
+      firstStrokeBool: false,
+      timeToDraw: this.timeOfDrawing
     };
   },
   props: {
@@ -49,6 +52,8 @@ export default {
     readonly: Boolean,
     currentColor: String,
     currentWidth: Number,
+    firstStroke: Boolean,
+    timeOfDrawing: Number
   },
   mounted: function() {
     // var c = this.$refs.canvas;
@@ -58,7 +63,7 @@ export default {
     this.draw();
   },
   methods: {
-    onClearCanvas(){
+    onClearCanvas() {
       var c = this.$refs.canvas;
 
       var ctx = c.getContext("2d");
@@ -76,14 +81,14 @@ export default {
     draw: function(event) {
       // requestAnimationFrame(this.draw);
       // if (this.mouse.down )
-      this.readonly;
-      
+      // this.readonly;
+
       var c = this.$refs.canvas;
 
       var ctx = c.getContext("2d");
 
       ctx.clearRect(0, 0, 800, 800);
-      
+
       this.drawingStrokes.forEach(draw => {
         ctx.beginPath();
 
@@ -103,8 +108,21 @@ export default {
         ctx.stroke();
       });
     },
+    myTimer() {
+      this.timeToDraw += 1;
+    },
+    onStopTimer() {
+      clearInterval(timer);
+      this.$emit("timerStopped", this.timeToDraw);
+    },
     handleMouseDown: function(event) {
       if (!this.readonly) {
+        if (!this.firstStrokeBool) {
+          this.firstStrokeBool = true;
+          this.timeToDraw = 0;
+          timer = setInterval(this.myTimer, 1000);
+        }
+
         const newStrokes = this.drawingStrokes;
         this.mouse.down = true;
 

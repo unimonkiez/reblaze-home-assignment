@@ -10,6 +10,7 @@
         v-bind:readonly="false"
         v-bind:currentColor.sync="color"
         v-bind:currentWidth.sync="width"
+        @timerStopped="onTimerStopped"
       />
       <Palette
         class="palette"
@@ -17,15 +18,25 @@
         @colorUpdate="onColorChanged"
         @widthUpdate="onChangeWidth"
       />
+      <!-- <v-tooltip bottom>
+      <template v-slot:activator="{ on }">-->
       <v-btn flat icon>
         <v-icon @click="onClearCanvas">delete_forever</v-icon>
       </v-btn>
+      <!-- </template>
+      <span>Bottom tooltip</span>
+      </v-tooltip>-->
+      <v-btn flat icon>
+        <v-icon @click="onSaveDrawing">save</v-icon>
+      </v-btn>
+
       <!-- </DrawingBoard> -->
       <!-- v-bind:currentColor.sync="chosenColor"  v-bind:currentWidth="chosenWidth" -->
     </v-flex>
     <!-- </v-layout> -->
   </div>
 </template>
+
 
 <script>
 // @ is an alias to /src
@@ -42,21 +53,38 @@ export default {
   },
   props: {
     chosenColor: String,
-    chosenWidth: Number
+    chosenWidth: Number,
+    timeToDraw: Number
   },
   data() {
     return {
       // drawings: Drawings.data,
       colors: Colors.data.colors,
       color: this.chosenColor,
-      width: this.chosenWidth
+      width: this.chosenWidth,
+      time: this.timeToDraw
     };
   },
   mounted() {
-   this.color = "#000000";
-   this.width = 1;
+    this.color = "#000000";
+    this.width = 1;
   },
   methods: {
+    onTimerStopped(timeOfDrawing) {
+      this.time = timeOfDrawing;
+    },
+    onSaveDrawing() {
+      this.$refs.drawingBoard.onStopTimer();
+      let today = new Date();
+      let date =
+        today.getDate() +
+        "/" +
+        (today.getMonth() + 1) +
+        "/" +
+        today.getFullYear();
+      let time = today.getHours() + ":" + today.getMinutes();
+      let dateTime = date + " " + time;
+    },
     onClearCanvas() {
       this.$refs.drawingBoard.onClearCanvas();
     },

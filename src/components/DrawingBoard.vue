@@ -14,7 +14,6 @@
 
 <script>
 // import DrawingBoardCursor from "@/components/DrawingBoardCursor.vue";
-let timer;
 
 export default {
   name: "DrawingBoard",
@@ -39,7 +38,8 @@ export default {
       },
       drawingStrokes: this.strokes,
       firstStrokeBool: false,
-      timeToDraw: this.timeOfDrawing
+      timeToDraw: this.timeOfDrawing,
+      timer: ''
     };
   },
   props: {
@@ -112,7 +112,7 @@ export default {
       this.timeToDraw += 1;
     },
     onStopTimer() {
-      clearInterval(timer);
+      clearInterval(this.timer);
       this.$emit("timerStopped", this.timeToDraw);
     },
     handleMouseDown: function(event) {
@@ -120,7 +120,7 @@ export default {
         if (!this.firstStrokeBool) {
           this.firstStrokeBool = true;
           this.timeToDraw = 0;
-          timer = setInterval(this.myTimer, 1000);
+          this.timer = setInterval(this.myTimer, 1000);
         }
 
         const newStrokes = this.drawingStrokes;

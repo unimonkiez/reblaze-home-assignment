@@ -29,7 +29,10 @@
       <v-btn flat icon>
         <v-icon @click="onSaveDrawing">save</v-icon>
       </v-btn>
-
+    <v-switch
+      v-model="privateDrawing"
+      :label="`Private drawing: ${privateDrawing.toString()}.`"
+    ></v-switch>
       <!-- </DrawingBoard> -->
       <!-- v-bind:currentColor.sync="chosenColor"  v-bind:currentWidth="chosenWidth" -->
     </v-flex>
@@ -62,7 +65,8 @@ export default {
       colors: Colors.data.colors,
       color: this.chosenColor,
       width: this.chosenWidth,
-      time: this.timeToDraw
+      time: this.timeToDraw,
+      privateDrawing: false
     };
   },
   mounted() {
@@ -75,6 +79,7 @@ export default {
     },
     onSaveDrawing() {
       this.$refs.drawingBoard.onStopTimer();
+      alert(this.time);
       let today = new Date();
       let date =
         today.getDate() +

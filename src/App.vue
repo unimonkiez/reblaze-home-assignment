@@ -13,6 +13,9 @@
       <v-tab ripple>
         Create
       </v-tab>
+      <v-tab ripple>
+        Show
+      </v-tab>
     </v-tabs>
 
     <router-view/>
@@ -25,9 +28,11 @@ import Drawings from './drawings.js';
 import Colors from './colors.js';
 
 const indexToRouteName = [
-  '/',
+  '/home',
   '/create',
+  '/show'
 ];
+
 
 export default {
   data() {

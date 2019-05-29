@@ -1,7 +1,7 @@
 <template>
   <div class="drawing-list">
     <div class="drawings-container">
-      <DrawingThumb
+      <DrawingThumb class="thumbnails"
         v-for="(item, index) in drawings"
         v-bind:key="item.id"
         v-bind:draw.sync="drawings[index]"

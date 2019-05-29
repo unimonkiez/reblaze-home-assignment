@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <DrawingList v-bind:drawings="drawings"/>
+    <DrawingList class="drawings" v-bind:drawings="drawings"/>
   </div>
 </template>
 
@@ -18,8 +18,6 @@ export default {
     return {
       drawings: Drawings.data.draws
     };
-  }
+  },
 };
-</script>
-
 </script>

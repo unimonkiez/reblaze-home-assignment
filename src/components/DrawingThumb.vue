@@ -1,7 +1,7 @@
 <template>
   <div class="drawing-thumb">
     I'm a drawing with id: {{draw.id}}
-    <div class="drawing-thumb-board-container">
+    <div class="drawing-thumb-board-container" @click="onClickedThumbnail">
       <DrawingBoard v-bind:strokes.sync="draw.content" readonly/>
     </div>
   </div>
@@ -17,6 +17,14 @@ export default {
   },
   props: {
     draw: Object
+  },
+  methods: {
+    onClickedThumbnail() {
+      this.$router.push({
+        name: "show",
+        params: { drawing: this.draw }
+      });
+    }
   }
 };
 </script>
@@ -25,9 +33,11 @@ export default {
 <style scoped>
 .drawing-thumb-board-container {
   width: 20%;
+  transition-duration: 0.5s;
 }
-/* .thumbnails:hover {
-    width: 130%;
-    transition: 0.5s;
-  } */
+
+.drawing-thumb-board-container:hover {
+  width: 30%;
+  transition-duration: 0.5s;
+}
 </style>

@@ -10,7 +10,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: Home,
     },
@@ -20,9 +20,10 @@ export default new Router({
       component: Create
     },
     {
-      path: '/show/:id',
+      path: '/show',
       name: 'show',
-      component: Show
+      component: Show,
+      props: true
     }
   ]
 })

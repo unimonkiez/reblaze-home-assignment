@@ -39,7 +39,7 @@ export default {
       drawingStrokes: this.strokes,
       firstStrokeBool: false,
       timeToDraw: this.timeOfDrawing,
-      timer: ''
+      timer: ""
     };
   },
   props: {
@@ -104,10 +104,24 @@ export default {
 
         ctx.strokeStyle = draw.color;
         ctx.lineWidth = draw.width;
+        // setTimeout(() => {
+        //   ctx.stroke();
+        // }, 1000);
 
+        // this.sleep(1000).then(() => {
+        //   ctx.stroke();
+        // });
+        // let a = 1;
+        // if(a = 0)
+        // {
+        // setTimeout(() => ctx.stroke(), 1000);
+        // }
         ctx.stroke();
       });
     },
+    // sleep(delay) {
+    //   return new Promise(resolve => setTimeout(resolve, delay));
+    // },
     myTimer() {
       this.timeToDraw += 1;
     },

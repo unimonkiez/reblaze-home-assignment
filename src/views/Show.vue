@@ -1,7 +1,7 @@
 <template>
   <div class="show">
     <v-flex xs10 sm6 offset-sm3>
-      This is '{{this.drawing.id}}', by '{{this.drawing.creator}}', created on the {{this.drawing.date}}.
+      This is '{{this.drawing.id}}', by '{{this.drawing.creator}}', created on the {{this.drawing.date}} and took {{this.drawing.time}} seconds to make.
       <DrawingBoard
         ref="drawingBoard"
         class="drawingBoard"
@@ -38,11 +38,6 @@ export default {
   data() {
     return {
     };
-  },
-  mounted()
-  {
-// alert(1);
-// let a = this.drawing;
   },
   methods: {
     onRedraw(){

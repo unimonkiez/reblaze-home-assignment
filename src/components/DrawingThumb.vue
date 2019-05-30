@@ -1,6 +1,6 @@
 <template>
-  <div class="drawing-thumb">
-    I'm a drawing with id: {{draw.id}}
+  <div class="drawing-thumb" v-if="!draw.private">
+    {{draw.id}}, by {{draw.creator}}
     <div class="drawing-thumb-board-container" @click="onClickedThumbnail">
       <DrawingBoard v-bind:strokes.sync="draw.content" readonly/>
     </div>

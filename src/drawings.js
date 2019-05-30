@@ -7,8 +7,9 @@ export default class Drawings {
                 {
                     id: 'abc',
                     creator: 'Admin',
-                    private: 'false',
+                    private: false,
                     date: '18.4.18',
+                    time: '5',
                     content: [
                         {
                             width: 20,
@@ -34,24 +35,28 @@ export default class Drawings {
                 {
                     id: '123',
                     creator: 'Admin',
-                    private: 'false',
+                    private: false,
                     date: '20.5.19',
+                    time: '10',
                     content: [
                         {
                             width: 10,
                             color: '#0000ff',
                             coordinates: [
                                 { x: 12, y: 13 },
-                                { x: 12, y: 14 },
-                                { x: 12, y: 15 },
+                                { x: 17, y: 100 },
+                                { x: 120, y: 151 },
                                 { x: 12, y: 166 },
                             ],
                         },
                             {
                             width: 20,
-                            color: '#ffffff',
+                            color: '#ffaaff',
                             coordinates: [
                                 { x: 12, y: 50 },
+                                { x: 123, y: 321 },
+                                { x: 564, y: 1 },
+                                { x: 1, y: 543 },
                             ],
                         },
                         {
@@ -66,10 +71,11 @@ export default class Drawings {
                     ]
                 },
                 {
-                    id: 'A private drawing',
+                    id: 'No longer a private drawing',
                     creator: 'Admin',
-                    private: 'true',
+                    private: false,
                     date: '25.5.19',
+                    time: '25',
                     content: [
                         {
                             width: 6,
@@ -97,8 +103,9 @@ export default class Drawings {
                 {
                     id: 'Not private',
                     creator: 'Admin',
-                    private: 'false',
+                    private: false,
                     date: '29.5.19',
+                    time: '66',
                     content: [
                         {
                             width: 50,

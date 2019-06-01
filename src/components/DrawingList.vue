@@ -4,7 +4,7 @@
       <DrawingThumb class="thumbnails"
         v-for="(item, index) in drawings"
         v-bind:key="item.id"
-        v-bind:draw.sync="drawings[index]"
+        v-bind:draw="drawings[index]"
       />
     </div>
   </div>

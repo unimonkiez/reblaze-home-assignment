@@ -36,7 +36,7 @@ export default {
         },
         down: false
       },
-      drawingStrokes: this.strokes,
+      drawingStrokes: JSON.parse(JSON.stringify(this.strokes)),
       firstStrokeBool: false,
       timeToDraw: this.timeOfDrawing,
       timer: ""

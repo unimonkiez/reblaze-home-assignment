@@ -1,8 +1,8 @@
 <template>
   <div class="drawing-thumb" v-if="!draw.private">
-    {{draw.id}}, by {{draw.creator}}
+    {{draw.name}}, by {{draw.creator}} and my ID is {{draw.id}}
     <div class="drawing-thumb-board-container" @click="onClickedThumbnail">
-      <DrawingBoard v-bind:strokes.sync="draw.content" readonly/>
+      <DrawingBoard v-bind:strokes="draw.content" readonly/>
     </div>
   </div>
 </template>

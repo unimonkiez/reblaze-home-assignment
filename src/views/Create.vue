@@ -3,6 +3,7 @@
     <!-- <v-layout> -->
     <v-flex xs10 sm6 offset-sm3>
       <!-- v-bind:currentColor.sync="chosenColor" v-bind:currentWidth.sync="chosenWidth" -->
+      <!-- v-bind:strokes="drawingStrokes" -->
       <DrawingBoard
         ref="drawingBoard"
         class="drawingBoard"
@@ -26,13 +27,18 @@
       <!-- </template>
       <span>Bottom tooltip</span>
       </v-tooltip>-->
+      <v-form ref="form" v-model="valid" lazy-validation>
+        <v-text-field
+          v-model="drawingName"
+          :rules="[rules.required, rules.min, rules.max]"
+          placeholder="Drawing name"
+        ></v-text-field>
+      </v-form>
       <v-btn flat icon>
         <v-icon @click="onSaveDrawing">save</v-icon>
       </v-btn>
-    <v-switch
-      v-model="privateDrawing"
-      :label="`Private drawing: ${privateDrawing.toString()}.`"
-    ></v-switch>
+      <!-- <v-text-field value="${this.time}"></v-text-field> -->
+      <v-switch v-model="privateDrawing" :label="`Private drawing: ${privateDrawing.toString()}.`"></v-switch>
       <!-- </DrawingBoard> -->
       <!-- v-bind:currentColor.sync="chosenColor"  v-bind:currentWidth="chosenWidth" -->
     </v-flex>
@@ -44,7 +50,6 @@
 <script>
 // @ is an alias to /src
 import DrawingBoard from "@/components/DrawingBoard.vue";
-// import Drawings from "@/drawings";
 import Palette from "@/components/Palette.vue";
 import Colors from "@/colors.js";
 
@@ -55,18 +60,33 @@ export default {
     Palette
   },
   props: {
-    chosenColor: String,
-    chosenWidth: Number,
-    timeToDraw: Number
+    // chosenColor: String,
+    // chosenWidth: Number,
+    // timeToDraw: Number,
+    drawings: Object
   },
+  // computed: {
+  //   form() {
+  //     return {
+  //       name: this.drawingName
+  //     };
+  //   }
+  // },
   data() {
     return {
-      // drawings: Drawings.data,
+      valid: true,
+      // strokes: [],
       colors: Colors.data.colors,
       color: this.chosenColor,
       width: this.chosenWidth,
       time: this.timeToDraw,
-      privateDrawing: false
+      privateDrawing: false,
+      drawingName: "",
+      rules: {
+        required: value => !!value || "Required.",
+        min: v => v.length >= 3 || "Min 3 characters",
+        max: v => v.length <= 20 || "Max 20 characters"
+      }
     };
   },
   mounted() {
@@ -78,17 +98,38 @@ export default {
       this.time = timeOfDrawing;
     },
     onSaveDrawing() {
-      this.$refs.drawingBoard.onStopTimer();
-      alert(this.time);
-      let today = new Date();
-      let date =
-        today.getDate() +
-        "/" +
-        (today.getMonth() + 1) +
-        "/" +
-        today.getFullYear();
-      let time = today.getHours() + ":" + today.getMinutes();
-      let dateTime = date + " " + time;
+      if (this.$refs.form.validate()) {
+        this.$refs.drawingBoard.onStopTimer();
+        const today = new Date();
+        const date =
+          today.getDate() +
+          "/" +
+          (today.getMonth() + 1) +
+          "/" +
+          today.getFullYear();
+        const time =
+          today.getHours() +
+          ":" +
+          today.getMinutes() +
+          ":" +
+          today.getSeconds();
+        const dateTime = date + " " + time;
+
+        const creator = "Admin";
+
+        const drawing = {
+          id: creator + "," + this.drawingName + "," + date + "," + time,
+          name: this.drawingName,
+          creator: creator,
+          private: this.privateDrawing,
+          date: dateTime,
+          time: this.time,
+          content: this.$refs.drawingBoard.drawingStrokes
+        };
+
+        this.drawings.addDrawing(drawing);
+        alert("'" + drawing.name + "'" + " was saved successfully!");
+      }
     },
     onClearCanvas() {
       this.$refs.drawingBoard.onClearCanvas();

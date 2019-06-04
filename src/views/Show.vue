@@ -1,12 +1,12 @@
 <template>
   <div class="show">
     <v-flex xs10 sm6 offset-sm3>
-      This is '{{this.drawing.name}}', by '{{this.drawing.creator}}', created on the {{this.drawing.date}} and took {{this.calculateTime(this.drawing.time)}} seconds to make.
+      {{this.model.drawing.content.length}}This is '{{this.model.drawing.name}}', by '{{this.model.drawing.creator}}', created on the {{this.model.drawing.date}} and took {{this.calculateTime(this.model.drawing.time)}} seconds to make.
       <DrawingBoard
         ref="drawingBoard"
         class="drawingBoard"
         id="drawingBoard"
-        v-bind:strokes.sync="drawing.content"
+        v-bind:strokes="model.drawing.content"
         v-bind:readonly="true"
       />
       <v-btn flat icon>
@@ -26,27 +26,22 @@
 <script>
 // @ is an alias to /src
 import DrawingBoard from "@/components/DrawingBoard.vue";
+import { observer } from "mobx-vue";
 
-export default {
+export default observer( {
   name: "show",
   components: {
     DrawingBoard
   },
   props: {
-    drawing: Object
-  },
-  data() {
-    return {};
+    model: Object,
   },
   methods: {
     onRedraw() {
-      alert(10);
+      this.model.handleRedraw();
     },
     onPauseRedraw() {},
     onEdit() {},
-    onClearCanvas() {
-      this.$refs.drawingBoard.onClearCanvas();
-    },
     calculateTime(time) {
       if (time < 60) {
         return time;
@@ -62,7 +57,7 @@ export default {
       }
     }
   }
-};
+});
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

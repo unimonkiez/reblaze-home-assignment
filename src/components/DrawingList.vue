@@ -5,6 +5,7 @@
         v-for="(item, index) in drawings"
         v-bind:key="item.id"
         v-bind:draw="drawings[index]"
+        @onClick="$emit('onThumbClick', item.id)"
       />
     </div>
   </div>
@@ -20,7 +21,8 @@ export default {
     DrawingThumb
   },
   props: {
-    drawings: Array
+    drawings: Array,
+    onThumbClick: Function,
   }
 };
 </script>

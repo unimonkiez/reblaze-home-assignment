@@ -55,6 +55,14 @@ export default {
     firstStroke: Boolean,
     timeOfDrawing: Number
   },
+  watch: {
+    strokes: {
+      handler: () => {
+        this.draw();
+      },
+      deep: true
+    },
+  },
   mounted: function() {
     // var c = this.$refs.canvas;
     // var ctx = c.getContext("2d");
@@ -89,7 +97,9 @@ export default {
 
       ctx.clearRect(0, 0, 800, 800);
 
-      this.drawingStrokes.forEach(draw => {
+      const drawingStrokes = this.readonly ? this.strokes : this.drawingStrokes;
+
+      drawingStrokes.forEach(draw => {
         ctx.beginPath();
 
         const [firstCordinate, ...otherCordinates] = draw.coordinates;

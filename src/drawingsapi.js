@@ -1,9 +1,14 @@
 export default {
-
   async getData() {
     const res = await fetch("http://localhost:3000/api/drawings");
     const data = await res.json();
     return data;
+  },
+
+  async getDataById(id) {
+      const res = await fetch(`http://localhost:3000/api/drawings/${id}`);
+      const data = await res.json();
+      return data;
   },
 
   async addDrawing(drawing) {
@@ -13,4 +18,4 @@ export default {
       headers: { "Content-Type": "application/json" }
     });
   }
-}
+};

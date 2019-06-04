@@ -52,6 +52,7 @@
 import DrawingBoard from "@/components/DrawingBoard.vue";
 import Palette from "@/components/Palette.vue";
 import Colors from "@/colors.js";
+// import Uuid from "uuid/v4";
 
 export default {
   name: "create",
@@ -118,7 +119,8 @@ export default {
         const creator = "Admin";
 
         const drawing = {
-          id: creator + "," + this.drawingName + "," + date + "," + time,
+          // id: creator + "," + this.drawingName + "," + date + "," + time,
+          // id: Uuid.uuidv4(),
           name: this.drawingName,
           creator: creator,
           private: this.privateDrawing,

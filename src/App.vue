@@ -5,39 +5,51 @@
       <v-tab ripple>Create</v-tab>
       <!-- <v-tab ripple>Show</v-tab> -->
     </v-tabs>
-
-    <router-view v-if="ready" v-bind:drawings="drawings"/>
+    <router-view v-if="appModel.ready" v-bind:model="appModel.currentModel"/>
     <v-content></v-content>
   </v-app>
 </template>
 <script>
-import Drawings from './drawings.js';
-import Colors from './colors.js';
-import { observer } from 'mobx-vue';
+import AppModel from "@/models";
+import { observer } from "mobx-vue";
+import { setTimeout } from "timers";
 
-const indexToRouteName = [
-  '/home',
-  '/create',
-  '/show'
-];
+const indexToRouteName = ["home", "create", "show"];
 
 export default observer({
   data() {
+    const initialRoute = indexToRouteName.indexOf(this.$route.path);
+
     return {
-      drawings: new Drawings(),
-      currentRoute: indexToRouteName.indexOf(this.$route.path),
-      ready: false,
-    }
+      changedFromModel: false,
+      appModel: new AppModel({
+        initialTab: { path: this.$route.name, params: this.$route.params },
+        routeChangedFromModel: ((...params) => {
+          return this.routeChangedFromModel(...params);
+        }).bind(this)
+      }),
+      currentRoute: initialRoute === -1 ? 0 : initialRoute
+    };
   },
   methods: {
     tabChanged(routeIndex) {
-      const route = indexToRouteName[routeIndex];
-      this.$router.push(route)
+      if (!this.changedFromModel) {
+        const route = indexToRouteName[routeIndex];
+        this.$router.push("/" + route);
+        this.appModel.setTab({
+          path: this.$route.name,
+          params: this.$route.params
+        });
+      }
+    },
+    routeChangedFromModel(route) {
+      this.changedFromModel = true;
+      this.$router.push("/" + route);
+      this.currentRoute = indexToRouteName.indexOf(route);
+      setTimeout(() => {
+        this.changedFromModel = false;
+      }, 0);
     }
-  },
-  async created () {
-    await this.drawings.getData();
-    this.ready = true;
-  },
-})
+  }
+});
 </script>

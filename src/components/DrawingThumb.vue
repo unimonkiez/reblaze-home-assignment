@@ -1,7 +1,7 @@
 <template>
   <div class="drawing-thumb" v-if="!draw.private">
     {{draw.name}}, by {{draw.creator}} and my ID is {{draw.id}}
-    <div class="drawing-thumb-board-container" @click="onClickedThumbnail">
+    <div class="drawing-thumb-board-container" @click="$emit('onClick')">
       <DrawingBoard v-bind:strokes="draw.content" readonly/>
     </div>
   </div>
@@ -16,15 +16,8 @@ export default {
     DrawingBoard
   },
   props: {
-    draw: Object
-  },
-  methods: {
-    onClickedThumbnail() {
-      this.$router.push({
-        name: "show",
-        params: { drawing: this.draw }
-      });
-    }
+    draw: Object,
+    onClick: Function,
   }
 };
 </script>

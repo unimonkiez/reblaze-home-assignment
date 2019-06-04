@@ -68,9 +68,6 @@ export default {
     };
   },
   methods: {
-    onTest() {
-      alert(1); 
-    },
     handleWidth() {
       let newWidth = this.$refs.widthSlider.getValue();
       this.currentWidth = newWidth;
@@ -80,15 +77,15 @@ export default {
       this.currentColor = color;
       this.$emit("colorUpdate", color);
     },
-    onDragStart() {
-      this.handleWidth();
-    },
-    onDragging() {
-      this.handleWidth();
-    },
-    onDragEnd() {
-      this.handleWidth();
-    }
+    // onDragStart() {
+    //   this.handleWidth();
+    // },
+    // onDragging() {
+    //   this.handleWidth();
+    // },
+    // onDragEnd() {
+    //   this.handleWidth();
+    // }
   }
 };
 </script>

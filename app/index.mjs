@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import uuid from 'uuid/v4.js';
 
 const app = express();
 app.use(cors());
@@ -8,7 +9,7 @@ app.use(express.json());
 const data = {
     draws: [
         {
-            id: 1,
+            id: "1",
             name: 'abc',
             creator: 'Admin',
             private: false,
@@ -37,7 +38,7 @@ const data = {
             ]
         },
         {
-            id: 2,
+            id: "2",
             name: '123',
             creator: 'Admin',
             private: false,
@@ -76,7 +77,7 @@ const data = {
             ]
         },
         {
-            id: 3,
+            id: "3",
             name: 'No longer a private drawing',
             creator: 'Admin',
             private: false,
@@ -107,7 +108,7 @@ const data = {
             ]
         },
         {
-            id: 4,
+            id: "4",
             name: 'Not private',
             creator: 'Admin',
             private: false,
@@ -145,13 +146,22 @@ const data = {
 };
 
 app.get('/api/drawings', (req, res) => {
-    res.json(data);
+    res.json(data.draws);
+});
+
+app.get('/api/drawings/:id', (req, res) => {
+    const id = req.params.id;
+    // console.log(id);
+    const drawings = data.draws;
+    const currentDrawing = drawings.find(drawing => drawing.id === id);
+    res.json(currentDrawing);
 });
 
 app.post('/api/drawings', (req, res) => {
     const drawing = req.body;
+    drawing.id = uuid();
     data.draws.unshift(drawing);
-    res.send('ok');
+    res.send(drawing.id);
 });
 
 // app.get('/', (req, res) => {

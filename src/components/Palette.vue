@@ -19,9 +19,10 @@
       :max="50"
       ref="widthSlider"
       v-model="sliderValue"
-      v-on:drag-start="onDragStart"
-      v-on:dragging="onDragging"
-      v-on:drag-end="onDragEnd"
+      v-on:drag-start="handleWidth"
+      v-on:dragging="handleWidth"
+      v-on:drag-end="handleWidth"
+      @click.native="handleWidth"
     ></vue-slider>
     <!-- </v-flex> -->
     <!-- </div> -->
@@ -67,6 +68,9 @@ export default {
     };
   },
   methods: {
+    onTest() {
+      alert(1); 
+    },
     handleWidth() {
       let newWidth = this.$refs.widthSlider.getValue();
       this.currentWidth = newWidth;

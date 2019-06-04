@@ -28,10 +28,15 @@
 import DrawingBoard from "@/components/DrawingBoard.vue";
 import { observer } from "mobx-vue";
 
-export default observer( {
+export default {
   name: "show",
   components: {
     DrawingBoard
+  },
+  data() {
+    return {
+      observeModel: this.model,
+    };
   },
   props: {
     model: Object,
@@ -57,7 +62,7 @@ export default observer( {
       }
     }
   }
-});
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

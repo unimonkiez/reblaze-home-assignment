@@ -56,11 +56,8 @@ export default {
     timeOfDrawing: Number
   },
   watch: {
-    strokes: {
-      handler: () => {
-        this.draw();
-      },
-      deep: true
+    strokes() {
+      this.draw();
     },
   },
   mounted: function() {
